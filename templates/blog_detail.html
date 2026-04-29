@@ -1,0 +1,62 @@
+{% load static %}
+<!doctype html>
+<html lang="uz" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ post.title }} — Web Service Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script defer src="{% static 'js/app.js' %}"></script>
+  </head>
+  <body>
+    <div class="bg-animated" aria-hidden="true"></div>
+
+    <header class="topbar glass">
+      <a class="brand" href="/">
+        <span class="brand__mark" aria-hidden="true">WSH</span>
+        <span class="brand__text">Web Service Hub</span>
+      </a>
+      <nav class="nav">
+        <a class="nav__link" href="{% url 'blog_list' %}" data-i18n="nav_blog">Blog</a>
+        <a class="nav__link nav__cta" href="/#contact" data-i18n="nav_contact">Bog‘lanish</a>
+      </nav>
+      <div class="actions">
+        <div class="lang">
+          <button class="chip chip--active" type="button" data-lang="uz" aria-label="Uzbek">UZ</button>
+          <button class="chip" type="button" data-lang="ru" aria-label="Russian">RU</button>
+          <button class="chip" type="button" data-lang="en" aria-label="English">EN</button>
+        </div>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle dark mode">
+          <span class="icon" aria-hidden="true">☾</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <a class="muted" href="{% url 'blog_list' %}" data-i18n="blog_back">← Blogga qaytish</a>
+
+        <article class="post glass reveal">
+          <div class="post__head">
+            <p class="muted">{{ post.created_at|date:"d M Y" }}</p>
+            <h1 class="h2">{{ post.title }}</h1>
+          </div>
+
+          {% if post.image %}
+            <div class="post__img">
+              <img src="{{ post.image.url }}" alt="{{ post.title }}" loading="lazy" />
+            </div>
+          {% endif %}
+
+          <div class="post__content">
+            {{ post.content|linebreaks }}
+          </div>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>
+
